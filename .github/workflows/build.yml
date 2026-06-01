@@ -22,10 +22,13 @@ jobs:
 
       - name: Download OpenWrt SDK
         run: |
-          wget https://downloads.openwrt.org/releases/23.05.5/targets/mediatek/filogic/openwrt-sdk-23.05.5-mediatek-filogic_gcc-12.3.0_musl.Linux-x86_64.tar.xz
-          tar -xf openwrt-sdk-*.tar.xz
-          mv openwrt-sdk-*/ sdk
+        wget https://downloads.openwrt.org/releases/23.05.5/targets/mediatek/filogic/openwrt-sdk-23.05.5-mediatek-filogic_gcc-12.3.0_musl.Linux-x86_64.tar.xz
+        tar -xf openwrt-sdk-*.tar.xz
 
+        SDK_DIR=$(find . -maxdepth 1 -type d -name "openwrt-sdk-*")
+        echo "$SDK_DIR"
+
+    mv "$SDK_DIR" sdk
       - name: Extract happ package
         run: |
           mkdir -p sdk/package/happ-openwrt
